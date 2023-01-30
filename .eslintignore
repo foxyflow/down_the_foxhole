@@ -1,0 +1,7 @@
+# don't lint node_modules
+node_modules
+
+# don't lint build output and make sure it is set to buildfolder
+dist
+index.cjs
+.eslintrc.cjs

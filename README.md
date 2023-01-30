@@ -1,2 +1,5 @@
-# down_the_foxhole_part2
-backup of Down the Foxhole without the Rollup compiler 
+typescript game still in dev mode, part2 deleted Rollup compliler -- too many bugs.
+
+download
+npm install
+npm run start
