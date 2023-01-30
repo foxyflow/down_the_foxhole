@@ -1,10 +1,5 @@
 import Phaser from 'phaser'
 
-// export default class Game extends Phaser.Scene {
-// 	constructor() {
-// 		super('game')
-// 	}
-
 //Main game scene:
 export default class Game extends Phaser.Scene {
 	constructor (player: any, cursors: any, A: any, D: any, W: any, S: any)
@@ -21,6 +16,7 @@ export default class Game extends Phaser.Scene {
 		
 	}
     player: any;
+    playerIdle: any;
     cursors: any;
     A: any;
     D: any;
@@ -79,7 +75,7 @@ export default class Game extends Phaser.Scene {
 
 
         //Create player without Tiled Object Spawn Point: 
-            this.player = this.physics.add.sprite(100, 500, 'player');
+        this.player = this.physics.add.sprite(100, 500, 'player');
         // const spawnPoint = map.findObject("Objects", (obj: { name: string; }) => obj.name === "Spawn Point");
         // this.player = this.physics.add.sprite(spawnPoint.x, spawnPoint.y, "player");
         
@@ -118,6 +114,18 @@ export default class Game extends Phaser.Scene {
         this.W = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
         this.S = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
 
+        //Camera: and commented tricks:
+        this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
+        this.cameras.main.startFollow(this.player);
+        this.cameras.main.setZoom(1.5);
+        this.cameras.main.setBackgroundColor('000'); //light purple
+        // this.cameras.main.fadeIn(1000); //fade in camera
+        // this.cameras.main.fadeOut(1000); //fade out camera
+        // this.cameras.main.fade(1000, 0, 0, 0); //fade to black -- use for death
+        // this.cameras.main.x = 150; // move camera
+        // this.cameras.main.y = 150;
+
+
     }// End of create
 
      speed = 1500; // (works if commented out of constructor)
@@ -136,6 +144,8 @@ export default class Game extends Phaser.Scene {
         if(this.physics.overlap(this.player, this.coin)){
             this.takeCoin();
         }
+    
+
         
     }; // End of update.
 

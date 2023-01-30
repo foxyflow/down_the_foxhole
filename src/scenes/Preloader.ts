@@ -23,8 +23,9 @@ export default class Preloader extends Phaser.Scene {
             //load tilemap:
             this.load.tilemapTiledJSON('map1', 'src/assets/map1.json');
             //Player just as image:
-            this.load.spritesheet('player', 'src/assets/pngs/spritesheets/player-run-184x22.png', { frameWidth: 30, frameHeight: 22 });
-            this.load.spritesheet('playerIdle', 'src/assets/pngs/spritesheets/playerIdle120x22.png', { frameWidth: 30, frameHeight: 22 });
+            this.load.spritesheet('player', 'src/assets/pngs/spritesheets/fox/player-run-184x22.png', { frameWidth: 30, frameHeight: 22 });
+            //this.load.multiatlas('alexsprite', 'src/assets/alexsprite.json', 'src/assets/'); //load fox as player
+            this.load.spritesheet('playerIdle', 'src/assets/pngs/spritesheets/fox/playerIdle120x22.png', { frameWidth: 30, frameHeight: 22 });
             //load moneybag as coin:
             this.load.image('coin', 'src/assets/pngs/alex_money.png');
             // display loading text

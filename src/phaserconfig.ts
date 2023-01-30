@@ -6,9 +6,22 @@ import Game from './scenes/Game'
 
 const config: Phaser.Types.Core.GameConfig = {
 	type: Phaser.AUTO,
-	parent: 'app', //maybe change to game
+	parent: 'game', 
 	width: 1200,
-	height: 600,
+	height: 592,
+	scale: {
+		mode: Phaser.Scale.FIT,
+		autoCenter: Phaser.Scale.CENTER_BOTH,
+		min: {
+			width: 250,
+			height: 170,},
+		max: { 
+			width: 1200,
+			height: 592},
+	},
+	//
+	//autoCenter: Phaser.Scale.CENTER_BOTH
+	//backgroundColor: '#33A5E7', //light blue
 	physics: {
 		default: 'arcade',
 		arcade: {

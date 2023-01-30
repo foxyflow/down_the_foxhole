@@ -1,0 +1,188 @@
+{
+	"textures": [
+		{
+			"image": "player.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 243,
+				"h": 79
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "player-run-184x22.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 184,
+						"h": 22
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 184,
+						"h": 22
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 184,
+						"h": 22
+					}
+				},
+				{
+					"filename": "player-idle.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 132,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 5,
+						"y": 9,
+						"w": 119,
+						"h": 23
+					},
+					"frame": {
+						"x": 1,
+						"y": 25,
+						"w": 119,
+						"h": 23
+					}
+				},
+				{
+					"filename": "player-hurt.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 66,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 4,
+						"w": 59,
+						"h": 28
+					},
+					"frame": {
+						"x": 1,
+						"y": 50,
+						"w": 59,
+						"h": 28
+					}
+				},
+				{
+					"filename": "player-climb.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 99,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 6,
+						"y": 6,
+						"w": 87,
+						"h": 26
+					},
+					"frame": {
+						"x": 122,
+						"y": 25,
+						"w": 87,
+						"h": 26
+					}
+				},
+				{
+					"filename": "player-jump.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 66,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 6,
+						"w": 57,
+						"h": 25
+					},
+					"frame": {
+						"x": 62,
+						"y": 53,
+						"w": 57,
+						"h": 25
+					}
+				},
+				{
+					"filename": "playerIdle120x22.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 120,
+						"h": 22
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 0,
+						"w": 119,
+						"h": 22
+					},
+					"frame": {
+						"x": 121,
+						"y": 53,
+						"w": 119,
+						"h": 22
+					}
+				},
+				{
+					"filename": "player-crouch.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 66,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 7,
+						"y": 12,
+						"w": 55,
+						"h": 20
+					},
+					"frame": {
+						"x": 187,
+						"y": 1,
+						"w": 55,
+						"h": 20
+					}
+				},
+				{
+					"filename": "player-crouch-1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 33,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 7,
+						"y": 12,
+						"w": 22,
+						"h": 20
+					},
+					"frame": {
+						"x": 211,
+						"y": 23,
+						"w": 22,
+						"h": 20
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:84d4f2ad5040a131e465df86ddc8aed5:884c33fc0e732a762080d114febb943a:86d5339b780aedd87b35e2b7c0a7e11b$"
+	}
+}
