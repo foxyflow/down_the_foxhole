@@ -2,6 +2,7 @@ import Phaser from 'phaser'
 
 //Main game scene:
 export default class Game extends Phaser.Scene {
+    
 	constructor (player: any, cursors: any, A: any, D: any, W: any, S: any)
 	{
 		super('game');
@@ -15,6 +16,7 @@ export default class Game extends Phaser.Scene {
 		this.score = 0;
 		
 	}
+    alexkidd: any;
     player: any;
     playerIdle: any;
     cursors: any;
@@ -36,7 +38,7 @@ export default class Game extends Phaser.Scene {
     //input: any;
     //scene: any;
     //cameras: any;
-	spawnPoint: number = 1;
+	//spawnPoint: number = 1;
     
 
 
@@ -86,6 +88,9 @@ export default class Game extends Phaser.Scene {
         this.player.body.setSize(this.player.width - 20, this.player.height - 10, true); //true centers and the rest changes collisionbox size
 
         //Animated player:
+        
+
+
         this.anims.create({
             key: 'left',
             frames: this.anims.generateFrameNumbers('player', { start: 0, end: 2 }),
@@ -118,16 +123,16 @@ export default class Game extends Phaser.Scene {
         this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
         this.cameras.main.startFollow(this.player);
         this.cameras.main.setZoom(1.5);
-        this.cameras.main.setBackgroundColor('000'); //light purple
+        this.cameras.main.setBackgroundColor('000'); 
+        //this.cameras.main.fade(1000, 0, 0, 0); //fade to black -- use for death screen
         // this.cameras.main.fadeIn(1000); //fade in camera
         // this.cameras.main.fadeOut(1000); //fade out camera
-        // this.cameras.main.fade(1000, 0, 0, 0); //fade to black -- use for death
         // this.cameras.main.x = 150; // move camera
         // this.cameras.main.y = 150;
 
-
+    
     }// End of create
-
+    
      speed = 1500; // (works if commented out of constructor)
     update (){
     // game logic: updates every frame
@@ -144,7 +149,7 @@ export default class Game extends Phaser.Scene {
         if(this.physics.overlap(this.player, this.coin)){
             this.takeCoin();
         }
-    
+
 
         
     }; // End of update.
@@ -161,6 +166,7 @@ export default class Game extends Phaser.Scene {
             //player.setVelocityX(-speed); // This is the same as:
             this.player.body.velocity.x = -this.speed;
             this.player.anims.play('left', true);
+        
         }
         else if (this.S.isDown || this.cursors.down.isDown){
         
@@ -176,8 +182,9 @@ export default class Game extends Phaser.Scene {
             this.player.flipX = false;
             this.player.setVelocityX(this.speed);
             this.player.anims.play('right', true);
+            
         }
- 
+
         else
         {
             
@@ -193,12 +200,15 @@ export default class Game extends Phaser.Scene {
 
     //death be not proud
     playerDie(){
+        this.cameras.main.shake(300, 0.02); //shake camera time, intensity
         this.player.destroy();
         this.scene.start('menu', {score: this.score});
         this.dieSound.play();
         this.score = 0; //reset score
         this.bgMusic.stop();
+        
         this.cameras.main.flash(999, 255, 50, 35); //flash effect - ms, r, g, b
+        
 
     }
     //take a coin (moneybag)
@@ -207,7 +217,7 @@ export default class Game extends Phaser.Scene {
         this.coin.destroy();
         this.score += 10;
         this.scoreLabel.text = 'Score: ' + this.score;
-        
+        this.cameras.main.shake(300, 0.02); //shake camera time, intensity
     }
 
 }; // End of class Game

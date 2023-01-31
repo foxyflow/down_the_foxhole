@@ -19,9 +19,6 @@ const config: Phaser.Types.Core.GameConfig = {
 			width: 1200,
 			height: 592},
 	},
-	//
-	//autoCenter: Phaser.Scale.CENTER_BOTH
-	//backgroundColor: '#33A5E7', //light blue
 	physics: {
 		default: 'arcade',
 		arcade: {
@@ -32,3 +29,6 @@ const config: Phaser.Types.Core.GameConfig = {
 }
 
 export default new Phaser.Game(config)
+
+//things to try:
+//backgroundColor: '#33A5E7', //light blue
