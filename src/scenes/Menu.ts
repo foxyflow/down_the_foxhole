@@ -6,7 +6,7 @@ export default class Menu extends Phaser.Scene {
 
     }
     // add: any;
-    upKey: any;
+    upKey: any; // weird how Phaser didn't pick this up
     // input: any;
     // scene: any;
     //data pram is object coming from Play scene.

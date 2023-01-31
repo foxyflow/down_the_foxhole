@@ -1,12 +1,10 @@
 import Phaser from "phaser";
-
+// rename class and file to Main if having TS issues
 export default class Preloader extends Phaser.Scene {
     constructor() {
         super("preloader");
     }
 
-
-        
         //Load assets:
         preload (){
             //load menu background image:
@@ -23,16 +21,16 @@ export default class Preloader extends Phaser.Scene {
             //load tilemap:
             this.load.tilemapTiledJSON('map1', 'src/assets/map1.json');
             //Player just as image:
-            this.load.spritesheet('player', 'src/assets/pngs/spritesheets/fox/player-run-184x22.png', { frameWidth: 30, frameHeight: 22 });
-            this.load.spritesheet('playerIdle', 'src/assets/pngs/spritesheets/fox/playerIdle120x22.png', { frameWidth: 30, frameHeight: 22 });
-            //multiatlas:
-        
+            this.load.spritesheet('player', 'src/assets/pngs/spritesheets/fox/player-run-184x22.png', { frameWidth: 32.1, frameHeight: 22 });
+            this.load.spritesheet('playerIdle', 'src/assets/pngs/spritesheets/fox/playerIdle120x22.png', { frameWidth: 32, frameHeight: 22 });
+            this.load.spritesheet('playerClimb', 'src/assets/pngs/spritesheets/fox/player-climb.png', { frameWidth: 32, frameHeight: 30 });
+            //multiatlas: //try fox -- not using this atm.
+    
             //load moneybag as coin:
             this.load.image('coin', 'src/assets/pngs/alex_money.png');
             // display loading text
             let loadLabel = this.add.text(150, 150, 'loading...', {font: '30px Courier'}); //changed no fill to fill: '#ffffff'
             loadLabel.setOrigin(0.5, 0.5); // change the origin to the center of the text
-    
             // load audio
             this.load.audio('coin', ['src/assets/sounds/alexSoundFx/05.wav']);
             this.load.audio('die', ['src/assets/sounds/alexSoundFx/35.wav']);

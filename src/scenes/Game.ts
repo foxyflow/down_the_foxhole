@@ -12,11 +12,11 @@ export default class Game extends Phaser.Scene {
 		this.D = D;
 		this.W = W;
 		this.S = S;
-		this.speed = 100;
+		this.speed = 200; // constructor takes priority over speed declared later.
 		this.score = 0;
 		
 	}
-    alexkidd: any;
+    
     player: any;
     playerIdle: any;
     cursors: any;
@@ -25,21 +25,11 @@ export default class Game extends Phaser.Scene {
     W: any;
     S: any;
     score: number;
-    //make: any;
     coin: any;
-    //physics: any;
     scoreLabel: any;
-    //add: any;
     coinSound: any;
-    //sound: any;
     dieSound: any;
     bgMusic: any;
-    //anims: any;
-    //input: any;
-    //scene: any;
-    //cameras: any;
-	//spawnPoint: number = 1;
-    
 
 
     create (){
@@ -75,39 +65,36 @@ export default class Game extends Phaser.Scene {
         this.bgMusic.loop = true;
         this.bgMusic.volume = 0.2;
 
-
+        //Create player:
         //Create player without Tiled Object Spawn Point: 
-        this.player = this.physics.add.sprite(100, 500, 'player');
-        // const spawnPoint = map.findObject("Objects", (obj: { name: string; }) => obj.name === "Spawn Point");
-        // this.player = this.physics.add.sprite(spawnPoint.x, spawnPoint.y, "player");
-        
+        //this.player = this.physics.add.sprite(100, 500, 'player'); // manually place player
+        const spawnPoint = map.findObject("Objects", (obj: { name: string; }) => obj.name === "Spawn Point");
+        //@ts-ignore //spawnPoint.x from Tiled has a bug.
+        this.player = this.physics.add.sprite(spawnPoint.x, spawnPoint.y, "player");
         //Collision:
         this.player.setCollideWorldBounds(true);
         this.physics.add.collider(this.player, worldLayer);
         worldLayer.setCollisionByProperty({collides: true});
         this.player.body.setSize(this.player.width - 20, this.player.height - 10, true); //true centers and the rest changes collisionbox size
-
         //Animated player:
-        
-
-
         this.anims.create({
-            key: 'left',
-            frames: this.anims.generateFrameNumbers('player', { start: 0, end: 2 }),
-            frameRate: 15,
+            key: 'walk',
+            frames: this.anims.generateFrameNumbers('player', { start: 0, end: 5 }),
+            frameRate: 10,
             repeat: -1
         });
         // To just have 1 frame, you can use this instead of start and end properties:
-            //     frames: [ { key: 'player', frame: 4 } ],
-        this.anims.create({
-            key: 'right',
-            frames: this.anims.generateFrameNumbers('player', { start: 0, end: 2 }),
-            frameRate: 15,
-            repeat: -1
-        });
+            // frames: [ { key: 'player', frame: 4 } ],
+        
         this.anims.create({ //Idle not working
             key: 'idle',
-            frames: this.anims.generateFrameNumbers('playerIdle', { start: 0, end: 0 }),
+            frames: this.anims.generateFrameNumbers('playerIdle', { start: 1, end: 3 }),
+            frameRate: 4,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'climb',
+            frames: this.anims.generateFrameNumbers('playerClimb', { start: 0, end: 2 }),
             frameRate: 8,
             repeat: -1
         });
@@ -133,14 +120,14 @@ export default class Game extends Phaser.Scene {
     
     }// End of create
     
-     speed = 1500; // (works if commented out of constructor)
+    speed: number = 1500; // (works if commented out of constructor)
     update (){
     // game logic: updates every frame
     
         this.movePlayer();  // call movePlayer method
-        //player die
+        
         if (this.player.y > 550 || this.player.y < 10 || this.player.x > 1190 || this.player.x < 10){
-            this.playerDie();
+            this.playerDie(); //player dies if walks off screen:
         }
         if (this.player.x > 440 && this.player.x < 456 && this.player.y > 325 && this.player.y < 309){
             this.playerDie(); // death area on map.
@@ -150,8 +137,6 @@ export default class Game extends Phaser.Scene {
             this.takeCoin();
         }
 
-
-        
     }; // End of update.
 
     //Methods:
@@ -165,31 +150,32 @@ export default class Game extends Phaser.Scene {
             this.player.flipX = true;
             //player.setVelocityX(-speed); // This is the same as:
             this.player.body.velocity.x = -this.speed;
-            this.player.anims.play('left', true);
+            this.player.anims.play('walk', true);
         
         }
         else if (this.S.isDown || this.cursors.down.isDown){
-        
+            
             this.player.setVelocityY(this.speed);
+            this.player.anims.play('climb', true);
             
         }
         else if (this.W.isDown || this.cursors.up.isDown){
             
             this.player.setVelocityY(-this.speed);
+            this.player.anims.play('climb', true);
         }
         else if (this.D.isDown || this.cursors.right.isDown)
         {
             this.player.flipX = false;
             this.player.setVelocityX(this.speed);
-            this.player.anims.play('right', true);
+            this.player.anims.play('walk', true);
             
         }
 
         else
         {
-            
             this.player.setVelocity(0);
-            this.player.anims.play(false); // Stops the animation.
+           // this.player.anims.play(false); // Stops the animation.
             this.player.anims.play('idle', true);  
         }
     

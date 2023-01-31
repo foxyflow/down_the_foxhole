@@ -14,7 +14,7 @@ const config: Phaser.Types.Core.GameConfig = {
 		autoCenter: Phaser.Scale.CENTER_BOTH,
 		min: {
 			width: 250,
-			height: 170,},
+			height: 250,},
 		max: { 
 			width: 1200,
 			height: 592},
