@@ -15,13 +15,14 @@ export default class Menu extends Phaser.Scene {
         let score = data.score ?
             data.score : 0;
         // add background // was 0, 0 not 250 170
+        this.cameras.main.fadeIn(1000, 255, 0, 0);
         this.add.image(250, 170, 'background').setOrigin(0, 0);
         // add title
-        let nameLabel = this.add.text(250, 80, 'Welcome to death', {font: '50px Arial'});
+        let nameLabel = this.add.text(250, 80, 'Welcome to death', {font: '50px Lato'});
         nameLabel.setOrigin(0.5, 0.5);
         // display score
         let scoreText = 'score: ' + score;
-        let scoreLabel = this.add.text(250, 150, scoreText, {font: '25px Arial'});
+        let scoreLabel = this.add.text(250, 150, scoreText, {font: '40px Geo'});
         scoreLabel.setOrigin(0.5, 0.5);
         // add start button
         let startText = 'press the up arrow key to start';
@@ -29,6 +30,14 @@ export default class Menu extends Phaser.Scene {
         startLabel.setOrigin(0.5, 0.5);
         // store the up arrow key
         this.upKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
+
+        //move menu label
+        this.tweens.add({
+            targets: nameLabel,
+            angle: {from: -2, to: 2},
+            yoyo: true,
+            repeat: -1
+        });
 
     } // end of create()
 

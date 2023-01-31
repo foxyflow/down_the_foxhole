@@ -3,6 +3,8 @@ import Phaser from 'phaser'
 //Main game scene:
 export default class Game extends Phaser.Scene {
     
+
+    
 	constructor (player: any, cursors: any, A: any, D: any, W: any, S: any)
 	{
 		super('game');
@@ -14,9 +16,10 @@ export default class Game extends Phaser.Scene {
 		this.S = S;
 		this.speed = 200; // constructor takes priority over speed declared later.
 		this.score = 0;
+        
 		
 	}
-    
+
     player: any;
     playerIdle: any;
     cursors: any;
@@ -117,7 +120,7 @@ export default class Game extends Phaser.Scene {
         // this.cameras.main.x = 150; // move camera
         // this.cameras.main.y = 150;
 
-    
+        
     }// End of create
     
     speed: number = 1500; // (works if commented out of constructor)
@@ -186,16 +189,17 @@ export default class Game extends Phaser.Scene {
 
     //death be not proud
     playerDie(){
-        this.cameras.main.shake(300, 0.02); //shake camera time, intensity
+        
+        this.player.setTint(0xff0000);
+        this.player.setActive(false);
         this.player.destroy();
         this.scene.start('menu', {score: this.score});
         this.dieSound.play();
         this.score = 0; //reset score
         this.bgMusic.stop();
+        //this.cameras.main.flash(999, 255, 50, 35); //flash effect - ms, r, g, b
         
-        this.cameras.main.flash(999, 255, 50, 35); //flash effect - ms, r, g, b
         
-
     }
     //take a coin (moneybag)
     takeCoin(){

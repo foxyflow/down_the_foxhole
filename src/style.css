@@ -3,3 +3,12 @@ body {
     padding: 20;
     background-color: #3498db;
 }
+@import url(//fonts.googleapis.com/css?family=Lato);
+@import url(//fonts.googleapis.com/css?family=Geo);
+
+.hiddenText {
+    fon-family: Lato, Geo;
+    visibility: hidden;
+    height: 0;
+}
+

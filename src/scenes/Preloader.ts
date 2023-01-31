@@ -29,7 +29,7 @@ export default class Preloader extends Phaser.Scene {
             //load moneybag as coin:
             this.load.image('coin', 'src/assets/pngs/alex_money.png');
             // display loading text
-            let loadLabel = this.add.text(150, 150, 'loading...', {font: '30px Courier'}); //changed no fill to fill: '#ffffff'
+            let loadLabel = this.add.text(150, 150, 'LOADING...', {font: '30px Courier'}); //changed no fill to fill: '#ffffff'
             loadLabel.setOrigin(0.5, 0.5); // change the origin to the center of the text
             // load audio
             this.load.audio('coin', ['src/assets/sounds/alexSoundFx/05.wav']);
