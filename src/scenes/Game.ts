@@ -2,23 +2,6 @@ import Phaser from 'phaser'
 
 //Main game scene:
 export default class Game extends Phaser.Scene {
-    
-
-    
-	constructor (player: any, cursors: any, A: any, D: any, W: any, S: any)
-	{
-		super('game');
-		this.player = player;
-		this.cursors = cursors;
-		this.A = A;
-		this.D = D;
-		this.W = W;
-		this.S = S;
-		this.speed = 200; // constructor takes priority over speed declared later.
-		this.score = 0;
-        
-		
-	}
 
     player: any;
     playerIdle: any;
@@ -33,7 +16,20 @@ export default class Game extends Phaser.Scene {
     coinSound: any;
     dieSound: any;
     bgMusic: any;
+    speed: number = 1500; // (works if commented out of constructor)
 
+	constructor (player: any, cursors: any, A: any, D: any, W: any, S: any)
+	{
+		super('game');
+		this.player = player;
+		this.cursors = cursors;
+		this.A = A;
+		this.D = D;
+		this.W = W;
+		this.S = S;
+		this.speed = 200; // constructor takes priority over speed declared later.
+		this.score = 0;
+	}
 
     create (){
         //Create game objects:
@@ -88,7 +84,6 @@ export default class Game extends Phaser.Scene {
         });
         // To just have 1 frame, you can use this instead of start and end properties:
             // frames: [ { key: 'player', frame: 4 } ],
-        
         this.anims.create({ //Idle not working
             key: 'idle',
             frames: this.anims.generateFrameNumbers('playerIdle', { start: 1, end: 3 }),
@@ -120,10 +115,8 @@ export default class Game extends Phaser.Scene {
         // this.cameras.main.x = 150; // move camera
         // this.cameras.main.y = 150;
 
-        
     }// End of create
     
-    speed: number = 1500; // (works if commented out of constructor)
     update (){
     // game logic: updates every frame
     
@@ -132,9 +125,9 @@ export default class Game extends Phaser.Scene {
         if (this.player.y > 550 || this.player.y < 10 || this.player.x > 1190 || this.player.x < 10){
             this.playerDie(); //player dies if walks off screen:
         }
-        if (this.player.x > 440 && this.player.x < 456 && this.player.y > 325 && this.player.y < 309){
-            this.playerDie(); // death area on map.
-        }
+        // if (this.player.x > 440 && this.player.x < 456 && this.player.y > 325 && this.player.y < 309){
+        //     this.playerDie();} // death area on map. -- has to be a better way.
+
         //taking a coin: this.physics.add.overlap(objectA, objectB)
         if(this.physics.overlap(this.player, this.coin)){
             this.takeCoin();
@@ -147,50 +140,38 @@ export default class Game extends Phaser.Scene {
         if(!this.player.active){  //to not call player info if it's dead.
             return;
         }
-        
-        if (this.A.isDown || this.cursors.left.isDown)
-        {
+        //player movement:
+        if (this.A.isDown || this.cursors.left.isDown){
             this.player.flipX = true;
             //player.setVelocityX(-speed); // This is the same as:
             this.player.body.velocity.x = -this.speed;
             this.player.anims.play('walk', true);
-        
         }
         else if (this.S.isDown || this.cursors.down.isDown){
-            
             this.player.setVelocityY(this.speed);
             this.player.anims.play('climb', true);
-            
         }
         else if (this.W.isDown || this.cursors.up.isDown){
-            
             this.player.setVelocityY(-this.speed);
             this.player.anims.play('climb', true);
         }
-        else if (this.D.isDown || this.cursors.right.isDown)
-        {
+        else if (this.D.isDown || this.cursors.right.isDown){
             this.player.flipX = false;
             this.player.setVelocityX(this.speed);
             this.player.anims.play('walk', true);
-            
         }
-
-        else
-        {
+        else{
             this.player.setVelocity(0);
            // this.player.anims.play(false); // Stops the animation.
             this.player.anims.play('idle', true);  
         }
-    
-
         //Normalise and scale the velocity so that player can't move faster along a diagonal
         this.player.body.velocity.normalize().scale(this.speed);
     } // End of movePlayer
 
     //death be not proud
     playerDie(){
-        
-        this.player.setTint(0xff0000);
+        this.player.setTint(0xff0000); //needs a delay to be seen
         this.player.setActive(false);
         this.player.destroy();
         this.scene.start('menu', {score: this.score});
@@ -198,8 +179,6 @@ export default class Game extends Phaser.Scene {
         this.score = 0; //reset score
         this.bgMusic.stop();
         //this.cameras.main.flash(999, 255, 50, 35); //flash effect - ms, r, g, b
-        
-        
     }
     //take a coin (moneybag)
     takeCoin(){

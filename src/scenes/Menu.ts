@@ -1,20 +1,19 @@
 import Phaser from 'phaser';
 
 export default class Menu extends Phaser.Scene {
+
+    upKey: any;
+
     constructor() {
         super('menu');
-
     }
-    // add: any;
-    upKey: any; // weird how Phaser didn't pick this up
-    // input: any;
-    // scene: any;
+
     //data pram is object coming from Play scene.
     create(data: { score: any; }){
         // get score
         let score = data.score ?
             data.score : 0;
-        // add background // was 0, 0 not 250 170
+        // add background
         this.cameras.main.fadeIn(1000, 255, 0, 0);
         this.add.image(250, 170, 'background').setOrigin(0, 0);
         // add title
@@ -47,5 +46,5 @@ export default class Menu extends Phaser.Scene {
             // start the play scene
             this.scene.start('game'); //maybe change to Play
         }
-    }
-}
+    } // end of update()
+} // end of Menu class
